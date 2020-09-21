@@ -1,0 +1,6 @@
+# replace below with your info and rename to config.py
+
+TOKEN = 'YOUR_TOKEN_HERE''
+GUILD_NAME = 'YOUR_GUILD_NAME'
+TEXT_CHANNEL = 'YOUR_TEXT_CHANNEL_NAME'
+VOICE_CHANNEL = 'YOUR_VOICE_CHANNEL_NAME'
