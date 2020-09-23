@@ -19,16 +19,22 @@ async def on_ready():
 async def on_message(message):
     global muted
     global guild
+    gamers = next(c for c in guild.voice_channels if c.name==config.VOICE_CHANNEL)
 
-    if message.content == '!mute' and message.channel.name==config.TEXT_CHANNEL:
+    if message.author.id in config.BLACKLIST_IDS:
+        return
+
+    if (message.content == '!mute' or message.content == '!m') and message.channel.name==config.TEXT_CHANNEL:
         gamers = next(c for c in guild.voice_channels if c.name==config.VOICE_CHANNEL)
         if muted:
             for member in gamers.members:
-                await member.edit(mute = False)
+                if not member.id in config.DO_NOT_MUTE:
+                    await member.edit(mute = False)
             muted = False
         else:
             for member in gamers.members:
-                await member.edit(mute = True)
+                if not member.id in config.DO_NOT_MUTE:
+                    await member.edit(mute = True)
             muted = True
 
 client.run(config.TOKEN)
